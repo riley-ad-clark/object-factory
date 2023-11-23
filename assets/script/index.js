@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const createButton = document.querySelector('button');
     const alertMessage = document.querySelector('.alert-message');
 
-    createButton.addEventListener('click', function () {
-        const selectedShape = shapeSelect.value;
-        const selectedColor = colorSelect.value;
+    const sparkle = new Audio('./assets/audio/sparkle.mp3');
 
-        if (selectedShape && selectedColor) {
-            const newShape = new Shape(selectedShape, selectedColor);
-            addShapeToGrid(newShape);
-        }
-    });
+    function createSparkleSound() {
+        return new Audio('./assets/audio/sparkle.mp3')
+    }
+
+    function createSpawnSound() {
+        return new Audio('./assets/audio/spawn-sound.mp3');
+    }
 
     function addShapeToGrid(shape) {
         const grid = document.querySelector('.shape-grid');
@@ -37,9 +37,32 @@ document.addEventListener('DOMContentLoaded', function () {
 
             grid.appendChild(shapeDiv);
 
+            return false; // Grid is not full
         } else {
-            alertMessage.style.animation = 'fadeIn 0.25s ease-in-out forwards';
             alertMessage.innerText = 'The grid is full!';
+            return true; // Grid is full
         }
     }
+
+    createButton.addEventListener('click', function () {
+        const selectedShape = shapeSelect.value;
+        const selectedColor = colorSelect.value;
+
+        if (selectedShape && selectedColor) {
+            const newShape = new Shape(selectedShape, selectedColor);
+            const gridFull = addShapeToGrid(newShape);
+
+            if (!gridFull) {
+                const spawnSound = createSpawnSound();
+                spawnSound.play();
+            } else {
+                const sparkleSound = createSparkleSound();
+
+                alertMessage.classList.remove('pulsing');
+                alertMessage.offsetWidth;
+                alertMessage.classList.add('pulsing');
+                sparkleSound.play();
+            }
+        }
+    });
 });
