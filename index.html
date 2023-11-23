@@ -18,6 +18,26 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        
+        <div class="container center">
+            <div class="controls">
+                <label for="shape-select">Shape:</label>
+                <select class="shape-select">
+                    <option value="" disabled selected>Select</option>
+                    <option value="circle">Circle</option>
+                    <option value="square">Square</option>
+                </select>
+                <label for="color-select">Color:</label>
+                <select class="color-select">
+                    <option value="" disabled selected>Select</option>
+                    <option value="#09f">Blue</option>
+                    <option value="#9f0">Green</option>
+                    <option value="#f90">Orange</option>
+                    <option value="#f09">Pink</option>
+                    <option value="#90f">Purple</option>
+                </select>
+                <button>Create</button>
+            </div>
+            <div class="shape-grid"></div>
+        </div>
     </body>
 </html>
